@@ -86,7 +86,7 @@ export default class News extends Component {
         <h1 className="text-center">This is a news </h1>
         {this.state.loading && <Spinner />}
         <div className=" container my-3">
-          <div className="row  ">
+          {/* <div className="row  ">
             {!this.state.loading &&
               this.state.articles.map((element) => {
                 return (
@@ -105,7 +105,7 @@ export default class News extends Component {
                 );
               })}
           </div>
-        </div>
+        </div> */}
         <div className="container d-flex justify-content-between">
           <button
             disabled={this.state.page <= 1}
