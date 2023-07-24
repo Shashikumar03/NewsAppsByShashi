@@ -12,6 +12,7 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "reactstrap";
+import { Link } from "react-router-dom";
 
 export default class NavExample extends React.Component {
   constructor(props) {
@@ -31,31 +32,45 @@ export default class NavExample extends React.Component {
     return (
       <div>
         <Navbar color="light" light expand="md">
-          <NavbarBrand href="/">News Article</NavbarBrand>
+          <NavbarBrand to="/">News Article</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink href="/">Home</NavLink>
+                <NavLink tag={Link} to="/general">
+                  Home
+                </NavLink>
               </NavItem>
 
               <NavItem>
-                <NavLink href="/entertainment"> Entertainment</NavLink>
+                <NavLink tag={Link} to="/entertainment">
+                  Entertainment
+                </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/bussiness">Business</NavLink>
+                <NavLink tag={Link} to="/business">
+                  Bussiness
+                </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/health">Health</NavLink>
+                <NavLink tag={Link} to="/health">
+                  Health
+                </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/scince">Science</NavLink>
+                <NavLink tag={Link} to="/science">
+                  Science
+                </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="sports">Sports</NavLink>
+                <NavLink tag={Link} to="/sports">
+                  Sports
+                </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="technology">Technology</NavLink>
+                <NavLink tag={Link} to="/technology">
+                  Technology
+                </NavLink>
               </NavItem>
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>

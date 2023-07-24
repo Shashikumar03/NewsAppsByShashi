@@ -71,8 +71,6 @@ export default class News extends Component {
     let data = await fetch(url);
     this.setState({ loading: true });
     let parseData = await data.json();
-
-    console.log(parseData);
     this.setState({
       articles: parseData.articles,
       page: this.state.page + 1,
@@ -83,10 +81,11 @@ export default class News extends Component {
   render() {
     return (
       <>
+        {console.log(this.state.articles)}
         <h1 className="text-center">This is a news </h1>
         {this.state.loading && <Spinner />}
         <div className=" container my-3">
-          {/* <div className="row  ">
+          <div className="row  ">
             {!this.state.loading &&
               this.state.articles.map((element) => {
                 return (
@@ -100,12 +99,15 @@ export default class News extends Component {
                       }
                       imageUrl={element.urlToImage}
                       newsUrl={element.url}
+                      author={element.author}
+                      date={element.publishedAt}
+                      source={element.source.name}
                     />
                   </div>
                 );
               })}
           </div>
-        </div> */}
+        </div>
         <div className="container d-flex justify-content-between">
           <button
             disabled={this.state.page <= 1}
