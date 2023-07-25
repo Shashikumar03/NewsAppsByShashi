@@ -34,13 +34,18 @@ export default class News extends Component {
   }
 
   async componentDidMount() {
-    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=d093053d72bc40248998159804e0e67d&page=${this.state.page}&pageSize=${this.state.pageSize}`;
+    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=7124738db4854e628101693b7e339442&page=${this.state.page}&pageSize=${this.state.pageSize}`;
     //apiKey=420f69806b6a40aabfc45f8abb8a5391
     //apiKey=d093053d72bc40248998159804e0e67d
     //apiKey=8cb8c8c8a74d42c48b23feb01b0a765a
+    //apiKey=7124738db4854e628101693b7e339442
+    this.props.setProgress(10);
     this.setState({ loading: true });
     let data = await fetch(url);
+    this.props.setProgress(30);
     let parseData = await data.json();
+    this.props.setProgress(70);
+
     console.log(parseData);
 
     this.setState({
@@ -49,17 +54,18 @@ export default class News extends Component {
       loading: false,
       pageSize: this.totalResults,
     });
+    this.props.setProgress(100);
   }
   fetchMoreData = async () => {
     this.setState({ page: this.state.page + 1 });
-    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=d093053d72bc40248998159804e0e67d&page=${this.state.page}&pageSize=${this.state.pageSize}`;
+    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=7124738db4854e628101693b7e339442&page=${this.state.page}&pageSize=${this.state.pageSize}`;
     let data = await fetch(url);
     let parsedData = await data.json();
     this.setState({
       articles: this.state.articles.concat(parsedData.articles),
       totalResults: parsedData.totalResults,
     });
-    console.log("shashi" + this.state.articles);
+    
   };
 
   // prevHandle = async () => {
@@ -81,8 +87,8 @@ export default class News extends Component {
       <>
         <h1 className="text-center">
           Top news on {this.capitalizeFirstLetter(this.props.category)}
+          {this.state.loading && <Spinner />}
         </h1>
-        {this.state.loading && <Spinner />}
 
         <InfiniteScroll
           dataLength={this.state.articles.length}
