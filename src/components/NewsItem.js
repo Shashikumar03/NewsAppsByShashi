@@ -14,7 +14,7 @@ export default class NewsItem extends Component {
       this.props;
     return (
       // <h1>this is a news item</h1>
-      <div>
+      <div className="container">
         <Card
           color="info"
           style={{
@@ -36,7 +36,7 @@ export default class NewsItem extends Component {
             </CardSubtitle>
             <CardText>{discription}</CardText>
             <p className="card-text">
-              <small class="text-muted">
+              <small className="text-muted">
                 By {!author ? "Unknown" : author} on{" "}
                 {new Date(date).toGMTString()}
               </small>
