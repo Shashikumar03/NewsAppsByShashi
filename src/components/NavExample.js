@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Collapse,
   Navbar,
@@ -29,12 +29,16 @@ const NavExample = () => {
   //   });
   // }
 
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggle = () => setIsOpen(!isOpen);
+
   return (
     <div>
       <Navbar className="fixed-top" color="light" light expand="md">
         <NavbarBrand to="/">News Article</NavbarBrand>
-        <NavbarToggler />
-        <Collapse className="collapse navbar-collapse navbar">
+        <NavbarToggler onClick={toggle} />
+        <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
             <NavItem>
               <NavLink tag={Link} to="/general">

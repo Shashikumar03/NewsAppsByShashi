@@ -13,6 +13,7 @@ const News = (props) => {
   const [page, setPage] = useState(1);
   const [totalResults, setTotalResults] = useState(0);
   const [pageSize, setPageSize] = useState(8);
+
   // constructor(props) {
   //   super(props);
   //   state = {
@@ -29,7 +30,6 @@ const News = (props) => {
   // }
 
   const updateNews = async () => {
-    setPageSize(8);
     props.setProgress(10);
     const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page}&pageSize=${props.pageSize}`;
     setLoading(true);
@@ -45,12 +45,18 @@ const News = (props) => {
   };
   // useEffect is in the place of componenrDidMount
   useEffect(() => {
+    setPageSize(3);
     updateNews();
+    // eslint-disable-next-line
   }, []);
 
   const fetchMoreData = async () => {
+    const url = `https://newsapi.org/v2/top-headlines?country=${
+      props.country
+    }&category=${props.category}&apiKey=${props.apiKey}&page=${
+      page + 1
+    }&pageSize=${pageSize}`;
     setPage(page + 1);
-    const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page}&pageSize=${pageSize}`;
     let data = await fetch(url);
     let parsedData = await data.json();
     setArticles(articles.concat(parsedData.articles));
@@ -73,30 +79,27 @@ const News = (props) => {
 
   return (
     <>
-      <h1 className="text-center" style={{marginTop:'90px', color:'red'}}>
+      <h1 className="text-center" style={{ marginTop: "90px", color: "red" }}>
         Top news on {capitalizeFirstLetter(props.category)}
         {loading && <Spinner />}
       </h1>
 
       <InfiniteScroll
+        className="bg-primary"
         dataLength={articles.length}
         next={fetchMoreData}
         hasMore={articles.length !== totalResults}
-        loader={<Spinner />}
+        //loader={<Spinner />}
       >
-        <div className=" container">
-          <div className="row  ">
+        <div className="container ">
+          <div className="row">
             {articles.map((element) => {
               return (
-                <div className="col-md-3" key={element.url}>
+                <div className="col-md-4" key={element.url}>
                   <NewsItem
-                    title={element.title ? element.title : null}
-                    discription={
-                      element.description ? element.description : null
-                    }
-                    imageUrl={
-                      element.urlToImage ? element.urlToImage : "/logo.png"
-                    }
+                    title={element.title ? element.title : ""}
+                    description={element.description ? element.description : ""}
+                    imageUrl={element.urlToImage}
                     newsUrl={element.url}
                     author={element.author}
                     date={element.publishedAt}

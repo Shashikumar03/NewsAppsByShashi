@@ -24,7 +24,14 @@ const NewsItem = (props) => {
             <Badge>{source}</Badge>
           </Button>
         </div>
-        <img alt="Sample" src={imageUrl} />
+        <img
+          alt="Sample"
+          src={
+            imageUrl
+              ? imageUrl
+              : "https://fdn.gsmarena.com/imgroot/news/21/08/xiaomi-smart-home-india-annoucnements/-476x249w4/gsmarena_00.jpg"
+          }
+        />
 
         <CardBody>
           <CardTitle tag="h5">Top news</CardTitle>
