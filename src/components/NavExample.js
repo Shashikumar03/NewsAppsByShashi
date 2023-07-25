@@ -31,7 +31,7 @@ const NavExample = () => {
 
   return (
     <div>
-      <Navbar color="light" light expand="md">
+      <Navbar className="fixed-top" color="light" light expand="md">
         <NavbarBrand to="/">News Article</NavbarBrand>
         <NavbarToggler />
         <Collapse className="collapse navbar-collapse navbar">
